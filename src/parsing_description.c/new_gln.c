@@ -6,7 +6,7 @@
 /*   By: skwon2 <skwon2@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 15:11:48 by skwon2            #+#    #+#             */
-/*   Updated: 2024/10/29 17:39:10 by skwon2           ###   ########.fr       */
+/*   Updated: 2024/10/30 11:21:03 by skwon2           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,12 @@ void store_line(t_line *line_data)
 			if (line_data->read_byte <= 0)
 				break ;
 		}
-		if (line_data->line[i] == '\n')
+		if (line_data->buffer[line_data->buff_index] == '\n')
+		{
+			line_data->line[i++] = line_data->buffer[line_data->buff_index++];
 			break ;
-		line_data->line[i] = line_data->buffer[line_data->buff_index];
-		line_data->buff_index++;
-		i++;
+		}
+		line_data->line[i++] = line_data->buffer[line_data->buff_index++];
 	}
 	line_data->line[i] = '\0';
 	line_data->line_index = i;
